@@ -1,0 +1,75 @@
+<div class="left-panel" *ngIf="user">
+  <!-- Avatar -->
+  <div class="avatar-container">
+    <img [src]="user.avatar_url" [alt]="user.name" class="avatar">
+  </div>
+
+  <!-- Name and Bio -->
+  <div class="profile-info">
+    <h1 class="profile-name">{{ user.name }}</h1>
+    <p class="profile-login">{{ user.login }}</p>
+    <p class="profile-bio">{{ user.bio }}</p>
+
+    <!-- Follow Button -->
+    <button class="btn btn-follow w-100 mb-3">Follow</button>
+
+    <!-- Profile Stats -->
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-icon">👥</span>
+        <span class="stat-label"><strong>{{ user.followers }}</strong> followers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-icon">👤</span>
+        <span class="stat-label"><strong>{{ user.following }}</strong> following</span>
+      </div>
+    </div>
+
+    <!-- Company -->
+    <div class="info-item" *ngIf="user.company">
+      <span class="info-icon">🏢</span>
+      <div class="info-content">
+        <span class="info-label">Company</span>
+        <span class="info-value">{{ user.company }}</span>
+      </div>
+    </div>
+
+    <!-- Location -->
+    <div class="info-item" *ngIf="user.location">
+      <span class="info-icon">📍</span>
+      <div class="info-content">
+        <span class="info-label">Location</span>
+        <span class="info-value">{{ user.location }}</span>
+      </div>
+    </div>
+
+    <!-- Website -->
+    <div class="info-item" *ngIf="user.blog">
+      <span class="info-icon">🔗</span>
+      <div class="info-content">
+        <span class="info-label">Website</span>
+        <a [href]="user.blog" target="_blank" class="info-link">{{ user.blog }}</a>
+      </div>
+    </div>
+
+    <!-- Twitter -->
+    <div class="info-item" *ngIf="user.twitter_username">
+      <span class="info-icon">𝕏</span>
+      <div class="info-content">
+        <span class="info-label">X (Twitter)</span>
+        <a [href]="'https://twitter.com/' + user.twitter_username" target="_blank" class="info-link">
+          @{{ user.twitter_username }}
+        </a>
+      </div>
+    </div>
+
+    <!-- Member Since -->
+    <div class="info-item">
+      <span class="info-icon">📅</span>
+      <div class="info-content">
+        <span class="info-label">Member since</span>
+        <span class="info-value">{{ memberSince }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="contribution-section">
+  <h2 class="contribution-title">Contribution Graph</h2>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading contributions...</p>
+  </div>
+
+  <div *ngIf="!loading" class="contribution-container">
+    <div class="contribution-grid">
+      <div class="week" *ngFor="let week of weeks">
+        <div
+          class="day"
+          *ngFor="let day of week"
+          [style.background-color]="day.color"
+          [title]="getTooltip(day)"
+          (mouseenter)="onHover(day)"
+          (mouseleave)="onLeave()">
+        </div>
+      </div>
+    </div>
+
+    <div class="contribution-legend">
+      <span class="legend-label">Less</span>
+      <div class="legend-box" style="background-color: #ebedf0;"></div>
+      <div class="legend-box" style="background-color: #c6e48b;"></div>
+      <div class="legend-box" style="background-color: #7bc96f;"></div>
+      <div class="legend-box" style="background-color: #239a3b;"></div>
+      <div class="legend-box" style="background-color: #196127;"></div>
+      <span class="legend-label">More</span>
+    </div>
+  </div>
+
+  <div class="tooltip" *ngIf="hoveredDay" [ngClass]="{ show: hoveredDay }">
+    {{ getTooltip(hoveredDay) }}
+  </div>
+</div>

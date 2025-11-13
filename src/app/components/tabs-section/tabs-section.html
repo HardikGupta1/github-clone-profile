@@ -1,0 +1,83 @@
+<div class="tabs-container">
+  <!-- Tabs Header -->
+  <div class="tabs-header">
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'repositories'"
+      (click)="switchTab('repositories')">
+      <span class="tab-icon">📚</span>
+      <span class="tab-text">Repositories</span>
+      <span class="tab-count">{{ repositories.length }}</span>
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'projects'"
+      (click)="switchTab('projects')">
+      <span class="tab-icon">📊</span>
+      <span class="tab-text">Projects</span>
+      <span class="tab-count">0</span>
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'packages'"
+      (click)="switchTab('packages')">
+      <span class="tab-icon">📦</span>
+      <span class="tab-text">Packages</span>
+      <span class="tab-count">0</span>
+    </button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tabs-content">
+    <!-- Repositories Tab -->
+    <div class="tab-pane" *ngIf="activeTab === 'repositories'">
+      <div class="repositories-list">
+        <div
+          class="repository-card"
+          *ngFor="let repo of repositories"
+          (click)="openRepo(repo.html_url)">
+          <div class="repo-header">
+            <h3 class="repo-name">{{ repo.name }}</h3>
+            <span class="repo-visibility" *ngIf="repo.fork">
+              <span class="fork-icon">🔀</span> Forked
+            </span>
+          </div>
+
+          <p class="repo-description">{{ repo.description || 'No description provided' }}</p>
+
+          <div class="repo-footer">
+            <div class="repo-language" *ngIf="repo.language">
+              <span class="language-dot" [style.background-color]="getLanguageColor(repo.language)"></span>
+              {{ getLanguageName(repo.language) }}
+            </div>
+            <span class="repo-stat" *ngIf="repo.stargazers_count > 0">
+              ⭐ {{ repo.stargazers_count }}
+            </span>
+            <span class="repo-stat" *ngIf="repo.forks_count > 0">
+              🔀 {{ repo.forks_count }}
+            </span>
+            <span class="repo-updated">
+              Updated {{ formatDate(repo.updated_at) }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Tab -->
+    <div class="tab-pane" *ngIf="activeTab === 'projects'">
+      <div class="empty-state">
+        <span class="empty-icon">📊</span>
+        <p>No projects yet</p>
+      </div>
+    </div>
+
+    <!-- Packages Tab -->
+    <div class="tab-pane" *ngIf="activeTab === 'packages'">
+      <div class="empty-state">
+        <span class="empty-icon">📦</span>
+        <p>No packages yet</p>
+      </div>
+    </div>
+  </div>
+</div>

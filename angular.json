@@ -23,12 +23,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -86,5 +81,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "74b0ffd0-cac4-4b46-95ab-591934072255"
   }
 }
