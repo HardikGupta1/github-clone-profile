@@ -211,21 +211,22 @@ import { ContributionDay } from '../../models/user.model';
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .contribution-header {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   padding: 0 16px;
 }
 
 .section-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
-  color: #c9d1d9;
+  color: #f0f6fc;
   margin: 0;
+  letter-spacing: -0.3px;
 }
 
 .main-wrapper {
   display: flex;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   padding: 0 16px;
 }
 
@@ -233,22 +234,29 @@ import { ContributionDay } from '../../models/user.model';
   flex: 1;
   min-width: 0;
   border: 1px solid #30363d;
-  border-radius: 6px;
-  background-color: rgba(22, 27, 34, 0.4);
+  border-radius: 8px;
+  background-color: #0d1117;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.heatmap-wrapper:hover {
+  border-color: #30363d;
 }
 
 .heatmap-section {
   width: 100%;
-  padding: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .labels-row {
   display: flex;
   gap: 8px;
+  margin-bottom: 8px;
 }
 
 .spacer {
@@ -265,23 +273,24 @@ import { ContributionDay } from '../../models/user.model';
 
 .month-labels {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   padding: 0 0 4px 0;
   min-width: max-content;
 }
 
 .month-label {
-  font-size: 11px;
+  font-size: 12px;
   color: #8b949e;
   text-align: center;
-  flex: 0 0 14px;
+  flex: 0 0 16px;
   white-space: nowrap;
+  font-weight: 500;
 }
 
 .grid-row {
   display: flex;
   gap: 8px;
-  min-height: 110px;
+  min-height: 130px;
 }
 
 .day-labels-col {
@@ -299,6 +308,7 @@ import { ContributionDay } from '../../models/user.model';
   height: 16px;
   line-height: 16px;
   white-space: nowrap;
+  font-weight: 500;
 }
 
 .grid-scroll-wrapper {
@@ -306,15 +316,15 @@ import { ContributionDay } from '../../models/user.model';
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  border: 1px solid rgba(48, 54, 61, 0.2);
-  border-radius: 4px;
-  padding: 4px;
-  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 6px;
+  background-color: rgba(22, 27, 34, 0.5);
 }
 
 .contribution-grid {
   display: inline-flex;
-  gap: 4px;
+  gap: 5px;
   align-items: center;
   min-width: max-content;
   padding: 0;
@@ -323,23 +333,25 @@ import { ContributionDay } from '../../models/user.model';
 .week {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   flex-shrink: 0;
 }
 
 .day {
-  width: 13px;
-  height: 13px;
-  border-radius: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
   cursor: pointer;
-  border: 1px solid rgba(48, 54, 61, 0.3);
+  border: 1px solid rgba(48, 54, 61, 0.4);
   transition: all 0.15s ease;
   flex-shrink: 0;
 }
 
 .day:hover {
   outline: 2px solid #58a6ff;
-  outline-offset: 1px;
+  outline-offset: 2px;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(88, 166, 255, 0.2);
 }
 
 .legend-row {
@@ -347,34 +359,43 @@ import { ContributionDay } from '../../models/user.model';
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  padding-top: 8px;
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 1px solid #30363d;
 }
 
 .contribution-legend {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11px;
+  gap: 8px;
+  font-size: 12px;
   color: #8b949e;
 }
 
 .legend-label {
-  font-weight: 400;
+  font-weight: 500;
   margin: 0 4px;
   white-space: nowrap;
 }
 
 .legend-box {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border-radius: 2px;
-  border: 1px solid rgba(48, 54, 61, 0.3);
+  border: 1px solid rgba(48, 54, 61, 0.4);
   flex-shrink: 0;
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+.legend-box:hover {
+  border-color: #58a6ff;
 }
 
 .footer-row {
   border-top: 1px solid #30363d;
-  padding-top: 12px;
+  padding-top: 16px;
+  margin-top: 12px;
 }
 
 .learn-link {
@@ -382,10 +403,13 @@ import { ContributionDay } from '../../models/user.model';
   color: #58a6ff;
   text-decoration: none;
   white-space: nowrap;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .learn-link:hover {
   text-decoration: underline;
+  color: #79c0ff;
 }
 
 .year-selector-wrapper {
@@ -396,11 +420,12 @@ import { ContributionDay } from '../../models/user.model';
   display: flex;
   flex-direction: column;
   border: 1px solid #30363d;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
-  background-color: rgba(22, 27, 34, 0.4);
-  min-width: 68px;
+  background-color: #0d1117;
+  min-width: 72px;
   max-height: fit-content;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .year-btn {
@@ -408,12 +433,12 @@ import { ContributionDay } from '../../models/user.model';
   border: none;
   border-bottom: 1px solid #30363d;
   color: #8b949e;
-  font-size: 12px;
-  padding: 6px 8px;
+  font-size: 13px;
+  padding: 8px 12px;
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: center;
-  font-weight: 400;
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -427,9 +452,10 @@ import { ContributionDay } from '../../models/user.model';
 }
 
 .year-btn.active {
-  background-color: #5865f2;
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
   color: #ffffff;
   font-weight: 600;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .activity-section {
@@ -441,53 +467,67 @@ import { ContributionDay } from '../../models/user.model';
 
 .activity-overview {
   border: 1px solid #30363d;
-  border-radius: 6px;
-  padding: 16px;
-  background-color: rgba(22, 27, 34, 0.4);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #0d1117;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.activity-overview:hover {
+  border-color: #30363d;
 }
 
 .activity-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: #c9d1d9;
-  margin: 0 0 16px 0;
+  color: #f0f6fc;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.3px;
 }
 
 .activity-inner {
   display: flex;
-  gap: 32px;
+  gap: 36px;
 }
 
 .activity-text-section {
-  flex: 0 0 40%;
+  flex: 0 0 35%;
   border-right: 1px solid #30363d;
-  padding-right: 24px;
+  padding-right: 32px;
 }
 
 .activity-text {
   display: flex;
-  gap: 8px;
-  font-size: 12px;
-  color: #8b949e;
-  line-height: 1.5;
+  gap: 10px;
+  font-size: 13px;
+  color: #c9d1d9;
+  line-height: 1.6;
 }
 
 .activity-icon {
   flex-shrink: 0;
   margin-top: 2px;
-  width: 14px;
-  height: 14px;
-  min-width: 14px;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  color: #58a6ff;
 }
 
 .activity-text strong {
   color: #58a6ff;
   font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.activity-text strong:hover {
+  color: #79c0ff;
 }
 
 .activity-chart {
   flex: 1;
-  min-height: 140px;
+  min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -496,72 +536,93 @@ import { ContributionDay } from '../../models/user.model';
 .contribution-chart-svg {
   width: 100%;
   height: auto;
-  max-width: 350px;
+  max-width: 360px;
 }
 
 .contribution-activity {
   border: 1px solid #30363d;
-  border-radius: 6px;
-  padding: 16px;
-  background-color: rgba(22, 27, 34, 0.4);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #0d1117;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.contribution-activity:hover {
+  border-color: #30363d;
 }
 
 .activity-timeline {
-  margin: 16px 0 20px 0;
+  margin: 20px 0 24px 0;
 }
 
 .timeline-header {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .timeline-month {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #c9d1d9;
+  color: #f0f6fc;
 }
 
 .timeline-item {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .timeline-icon {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: #0d1117;
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, rgba(39, 161, 89, 0.1) 100%);
   border: 2px solid #30363d;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8b949e;
+  color: #58a6ff;
+  transition: all 0.2s ease;
+}
+
+.timeline-item:hover .timeline-icon {
+  border-color: #58a6ff;
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.15) 0%, rgba(39, 161, 89, 0.15) 100%);
 }
 
 .timeline-content-wrapper {
   flex: 1;
   min-width: 0;
+  margin-top: 2px;
 }
 
 .timeline-content {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
-  padding: 12px 16px;
+  gap: 20px;
+  padding: 14px 18px;
   border: 1px solid #30363d;
   border-radius: 6px;
-  border-left: 3px solid #30363d;
+  border-left: 3px solid #58a6ff;
+  background-color: rgba(88, 166, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.timeline-item:hover .timeline-content {
+  border-color: #58a6ff;
+  background-color: rgba(88, 166, 255, 0.08);
 }
 
 .timeline-text {
-  font-size: 13px;
-  color: #c9d1d9;
+  font-size: 14px;
+  color: #f0f6fc;
   flex: 1;
+  font-weight: 500;
 }
 
 .timeline-range {
-  font-size: 12px;
+  font-size: 13px;
   color: #8b949e;
   white-space: nowrap;
   flex-shrink: 0;
@@ -572,33 +633,41 @@ import { ContributionDay } from '../../models/user.model';
   background: none;
   border: 1px solid #30363d;
   color: #58a6ff;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   transition: all 0.2s ease;
-  margin-top: 16px;
+  margin-top: 20px;
+  letter-spacing: -0.2px;
 }
 
 .show-more-btn:hover {
   background-color: rgba(88, 166, 255, 0.1);
   border-color: #58a6ff;
+  color: #79c0ff;
+}
+
+.show-more-btn:active {
+  background-color: rgba(88, 166, 255, 0.15);
 }
 
 .tooltip {
   position: fixed;
   background-color: #0d1117;
-  color: #c9d1d9;
-  padding: 8px 12px;
+  color: #f0f6fc;
+  padding: 10px 14px;
   border-radius: 6px;
-  font-size: 11px;
+  font-size: 12px;
   border: 1px solid #30363d;
   pointer-events: none;
   white-space: nowrap;
   z-index: 1000;
   opacity: 0;
   transition: opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  font-weight: 500;
 }
 
 .tooltip.show {
@@ -609,6 +678,7 @@ import { ContributionDay } from '../../models/user.model';
   .main-wrapper {
     flex-direction: column;
     padding: 0 12px;
+    gap: 20px;
   }
 
   .year-selector {
@@ -621,8 +691,8 @@ import { ContributionDay } from '../../models/user.model';
     flex: 1;
     border-bottom: none;
     border-right: 1px solid #30363d;
-    padding: 8px 4px;
-    font-size: 10px;
+    padding: 10px 8px;
+    font-size: 12px;
   }
 
   .year-btn:last-child {
@@ -631,7 +701,7 @@ import { ContributionDay } from '../../models/user.model';
 
   .activity-inner {
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
   }
 
   .activity-text-section {
@@ -639,43 +709,84 @@ import { ContributionDay } from '../../models/user.model';
     border-right: none;
     border-bottom: 1px solid #30363d;
     padding-right: 0;
-    padding-bottom: 16px;
+    padding-bottom: 20px;
   }
 
-  .month-label { font-size: 10px; flex: 0 0 12px; }
-  .day { width: 12px; height: 12px; }
-  .day-label { font-size: 10px; }
-  .contribution-grid { gap: 3px; }
-  .week { gap: 3px; }
+  .month-label { font-size: 11px; flex: 0 0 14px; }
+  .day { width: 13px; height: 13px; }
+  .day-label { font-size: 11px; }
+  .contribution-grid { gap: 4px; }
+  .week { gap: 4px; }
 }
 
 @media (max-width: 768px) {
-  .contribution-header { padding: 0 12px; }
-  .main-wrapper { padding: 0 12px; gap: 12px; }
-  .activity-section { padding: 0 12px; }
-  .heatmap-section { padding: 12px; gap: 10px; }
+  .contribution-header { padding: 0 12px; margin-bottom: 20px; }
+  .main-wrapper { padding: 0 12px; gap: 16px; margin-bottom: 28px; }
+  .activity-section { padding: 0 12px; gap: 20px; }
+  .heatmap-section { padding: 16px; gap: 14px; }
 
-  .month-labels { gap: 1px; }
-  .month-label { font-size: 8px; flex: 0 0 10px; }
-  .day-label { font-size: 8px; }
+  .month-labels { gap: 4px; }
+  .month-label { font-size: 10px; flex: 0 0 12px; }
+  .day-label { font-size: 10px; }
+  .day { width: 12px; height: 12px; }
+  .grid-scroll-wrapper { padding: 4px; }
+  .contribution-grid { gap: 3px; }
+  .week { gap: 3px; }
+
+  .legend-row { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 4px; }
+  .contribution-legend { gap: 4px; font-size: 11px; }
+  .legend-label { margin: 0 2px; }
+  .legend-box { width: 10px; height: 10px; }
+  
+  .footer-row { border-top: 1px solid #30363d; padding-top: 14px; margin-top: 10px; }
+  .learn-link { font-size: 12px; }
+
+  .activity-overview { padding: 16px; }
+  .activity-title { font-size: 15px; margin-bottom: 16px; }
+  .activity-text { font-size: 12px; gap: 8px; }
+  .activity-icon { width: 14px; height: 14px; }
+  .activity-chart { min-height: 140px; }
+
+  .contribution-activity { padding: 16px; }
+  .timeline-header { margin-bottom: 16px; }
+  .timeline-month { font-size: 13px; }
+  .timeline-item { gap: 12px; }
+  .timeline-icon { width: 32px; height: 32px; }
+  .timeline-icon svg { width: 16px; height: 16px; }
+  .timeline-content { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 14px; border-left-width: 2px; }
+  .timeline-text { font-size: 13px; }
+  .timeline-range { font-size: 12px; }
+  .show-more-btn { padding: 10px 14px; font-size: 13px; margin-top: 16px; }
+}
+
+@media (max-width: 480px) {
+  .contribution-header { padding: 0 10px; margin-bottom: 16px; }
+  .section-title { font-size: 15px; }
+  .main-wrapper { padding: 0 10px; gap: 12px; margin-bottom: 20px; }
+  .activity-section { padding: 0 10px; gap: 16px; }
+
+  .heatmap-section { padding: 12px; gap: 12px; }
+  .spacer { width: 28px; }
+  .month-labels { gap: 2px; }
+  .month-label { font-size: 9px; flex: 0 0 10px; }
+  .day-label { font-size: 9px; }
   .day { width: 11px; height: 11px; }
   .grid-scroll-wrapper { padding: 3px; }
   .contribution-grid { gap: 2px; }
   .week { gap: 2px; }
 
-  .legend-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .contribution-legend { gap: 3px; font-size: 9px; }
+  .contribution-legend { gap: 3px; font-size: 10px; }
   .legend-label { margin: 0 2px; }
   .legend-box { width: 9px; height: 9px; }
-  
-  .footer-row { border-top: none; padding-top: 0; }
   .learn-link { font-size: 11px; }
 
   .activity-overview { padding: 12px; }
-  .activity-title { font-size: 12px; margin-bottom: 12px; }
+  .activity-title { font-size: 13px; margin-bottom: 12px; }
+  .activity-inner { gap: 12px; }
   .activity-text { font-size: 11px; gap: 6px; }
-  .activity-icon { width: 12px; height: 12px; min-width: 12px; }
-  .activity-chart { min-height: 120px; }
+  .activity-icon { width: 12px; height: 12px; }
+  .activity-chart { min-height: 110px; }
+  .contribution-chart-svg { max-width: 100%; }
 
   .contribution-activity { padding: 12px; }
   .timeline-header { margin-bottom: 12px; }
@@ -683,54 +794,12 @@ import { ContributionDay } from '../../models/user.model';
   .timeline-item { gap: 10px; }
   .timeline-icon { width: 28px; height: 28px; }
   .timeline-icon svg { width: 14px; height: 14px; }
-  .timeline-content { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 12px; }
+  .timeline-content { padding: 10px 12px; gap: 6px; }
   .timeline-text { font-size: 12px; }
   .timeline-range { font-size: 11px; }
   .show-more-btn { padding: 8px 12px; font-size: 12px; margin-top: 12px; }
-}
 
-@media (max-width: 480px) {
-  .contribution-header { padding: 0 8px; margin-bottom: 12px; }
-  .section-title { font-size: 12px; }
-  .main-wrapper { padding: 0 8px; gap: 8px; margin-bottom: 16px; }
-  .activity-section { padding: 0 8px; gap: 16px; }
-
-  .heatmap-section { padding: 8px; gap: 8px; }
-  .spacer { width: 24px; }
-  .month-labels { gap: 0.5px; }
-  .month-label { font-size: 7px; flex: 0 0 8px; }
-  .day-label { font-size: 7px; }
-  .day { width: 10px; height: 10px; }
-  .grid-scroll-wrapper { padding: 2px; }
-  .contribution-grid { gap: 2px; }
-  .week { gap: 2px; }
-
-  .contribution-legend { gap: 2px; font-size: 8px; }
-  .legend-label { margin: 0 1px; }
-  .legend-box { width: 8px; height: 8px; }
-  .learn-link { font-size: 10px; }
-
-  .activity-overview { padding: 10px; }
-  .activity-title { font-size: 11px; margin-bottom: 10px; }
-  .activity-inner { gap: 8px; }
-  .activity-text-section { border-right: none; border-bottom: 1px solid #30363d; padding-right: 0; padding-bottom: 8px; }
-  .activity-text { font-size: 10px; gap: 4px; }
-  .activity-icon { width: 11px; height: 11px; min-width: 11px; }
-  .activity-chart { min-height: 100px; max-height: 120px; }
-  .contribution-chart-svg { max-width: 100%; }
-
-  .contribution-activity { padding: 10px; }
-  .timeline-header { margin-bottom: 10px; }
-  .timeline-month { font-size: 11px; }
-  .timeline-item { gap: 8px; }
-  .timeline-icon { width: 24px; height: 24px; }
-  .timeline-icon svg { width: 12px; height: 12px; }
-  .timeline-content { padding: 8px 10px; }
-  .timeline-text { font-size: 11px; }
-  .timeline-range { font-size: 10px; }
-  .show-more-btn { padding: 7px 10px; font-size: 11px; margin-top: 10px; }
-
-  .tooltip { font-size: 9px; padding: 5px 8px; }
+  .tooltip { font-size: 11px; padding: 8px 12px; }
 }
   `]
 })

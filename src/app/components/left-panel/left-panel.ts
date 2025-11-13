@@ -1,3 +1,4 @@
+
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GitHubUser } from '../../models/user.model';
@@ -7,444 +8,303 @@ import { GitHubUser } from '../../models/user.model';
   standalone: true,
   imports: [CommonModule],
   template: `<div class="left-panel" *ngIf="user">
-  <!-- Avatar Container with Shadow -->
+  <!-- Avatar Container -->
   <div class="avatar-container">
     <img [src]="user.avatar_url" [alt]="user.name" class="avatar">
-    <div class="avatar-glow"></div>
+    <div class="status-indicator"></div>
   </div>
 
-  <!-- Name and Bio Section -->
-  <div class="profile-info">
+  <!-- Profile Info -->
+  <div class="profile-header">
     <h1 class="profile-name">{{ user.name }}</h1>
-    <p class="profile-login">{{ user.login }}</p>
-    
-    <button class="btn-follow">Follow</button>
+    <p class="profile-username">{{ user.login }}</p>
+  </div>
 
-    <!-- Profile Stats -->
-    <div class="stats">
-      <div class="stat-item">
-        <span class="stat-icon">👥</span>
-        <span class="stat-label"><strong>{{ user.followers }}</strong> followers</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">👤</span>
-        <span class="stat-label"><strong>{{ user.following }}</strong> following</span>
-      </div>
-    </div>
+  <!-- Follow Button -->
+  <button class="btn-follow">
+    <span class="follow-icon">👤</span>
+    Follow
+  </button>
 
-    <!-- Divider -->
-    <div class="divider"></div>
+  <!-- Bio Section -->
+  <div class="bio-section" *ngIf="user.bio">
+    <p class="bio-text">{{ user.bio }}</p>
+  </div>
 
-    <!-- Bio -->
-    <div class="info-section" *ngIf="user.bio">
-      <p class="bio-text">{{ user.bio }}</p>
-    </div>
+  <!-- Follower Stats -->
+  <div class="followers-section">
+    <a href="#" class="follower-link">
+      <svg class="icon-people" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Z"></path>
+      </svg>
+      <span class="follower-count">{{ user.followers }}</span> followers
+    </a>
+    <span class="separator">·</span>
+    <a href="#" class="follower-link">
+      <span class="follower-count">{{ user.following }}</span> following
+    </a>
+  </div>
 
+  <!-- Profile Details -->
+  <div class="details-section">
     <!-- Company -->
-    <div class="info-item" *ngIf="user.company">
-      <span class="info-icon">🏢</span>
-      <div class="info-content">
-        <span class="info-label">Company</span>
-        <span class="info-value">{{ user.company }}</span>
-      </div>
+    <div class="detail-item" *ngIf="user.company">
+      <svg class="detail-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M1.75 16A1.75 1.75 0 0 1 0 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 0 0 .25-.25V8.285a.25.25 0 0 0-.111-.208l-1.055-.703a.749.749 0 1 1 .832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0 1 14.25 16h-3.5a.766.766 0 0 1-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 0 1-.75-.75V14h-1v1.25a.75.75 0 0 1-.75.75Zm-.25-1.75c0 .138.112.25.25.25H4v-1.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v1.25h2.25a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25ZM3.75 6h.5a.75.75 0 0 1 0 1.5h-.5a.75.75 0 0 1 0-1.5ZM3 3.75A.75.75 0 0 1 3.75 3h.5a.75.75 0 0 1 0 1.5h-.5A.75.75 0 0 1 3 3.75Zm4 3A.75.75 0 0 1 7.75 6h.5a.75.75 0 0 1 0 1.5h-.5A.75.75 0 0 1 7 6.75ZM7.75 3h.5a.75.75 0 0 1 0 1.5h-.5a.75.75 0 0 1 0-1.5ZM3 9.75A.75.75 0 0 1 3.75 9h.5a.75.75 0 0 1 0 1.5h-.5A.75.75 0 0 1 3 9.75ZM7.75 9h.5a.75.75 0 0 1 0 1.5h-.5a.75.75 0 0 1 0-1.5Z"></path>
+      </svg>
+      <span class="detail-text">{{ user.company }}</span>
     </div>
 
     <!-- Location -->
-    <div class="info-item" *ngIf="user.location">
-      <span class="info-icon">📍</span>
-      <div class="info-content">
-        <span class="info-label">Location</span>
-        <span class="info-value">{{ user.location }}</span>
-      </div>
+    <div class="detail-item" *ngIf="user.location">
+      <svg class="detail-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"></path>
+      </svg>
+      <span class="detail-text">{{ user.location }}</span>
     </div>
 
     <!-- Email -->
-    <div class="info-item" *ngIf="user.email">
-      <span class="info-icon">✉️</span>
-      <div class="info-content">
-        <span class="info-label">Email</span>
-        <span class="info-value">{{ user.email }}</span>
-      </div>
+    <div class="detail-item" *ngIf="user.email">
+      <svg class="detail-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"></path>
+      </svg>
+      <a [href]="'mailto:' + user.email" class="detail-link">{{ user.email }}</a>
     </div>
 
     <!-- Website -->
-    <div class="info-item" *ngIf="user.blog">
-      <span class="info-icon">🔗</span>
-      <div class="info-content">
-        <span class="info-label">Website</span>
-        <a [href]="user.blog" target="_blank" class="info-link">{{ user.blog }}</a>
-      </div>
+    <div class="detail-item" *ngIf="user.blog">
+      <svg class="detail-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path>
+      </svg>
+      <a [href]="user.blog" target="_blank" class="detail-link">{{ formatUrl(user.blog) }}</a>
     </div>
 
     <!-- Twitter -->
-    <div class="info-item" *ngIf="user.twitter_username">
-      <span class="info-icon">𝕏</span>
-      <div class="info-content">
-        <span class="info-label">Twitter</span>
-        <a [href]="'https://twitter.com/' + user.twitter_username" target="_blank" class="info-link">
-          @{{ user.twitter_username }}
-        </a>
-      </div>
-    </div>
-
-    <!-- Member Since -->
-    <div class="info-item">
-      <span class="info-icon">📅</span>
-      <div class="info-content">
-        <span class="info-label">Joined</span>
-        <span class="info-value">{{ memberSince }}</span>
-      </div>
+    <div class="detail-item" *ngIf="user.twitter_username">
+      <svg class="detail-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M9.64 13.28c3.64 0 5.63-3.01 5.63-5.62 0-.08-.01-.17-.01-.25A4.03 4.03 0 0 0 16 6.43a3.94 3.94 0 0 1-1.14.31 2 2 0 0 0 .87-1.1 3.98 3.98 0 0 1-1.26.48A1.99 1.99 0 0 0 11.08 7.6c0 .16.02.31.04.46A5.66 5.66 0 0 1 7 5.8a1.99 1.99 0 0 0 .62 2.66c-.31-.01-.6-.1-.86-.24v.03c0 .96.69 1.77 1.6 1.95-.17.05-.34.07-.52.07-.13 0-.25-.01-.37-.03.25.78 1 1.35 1.87 1.37A4 4 0 0 1 6.85 12a4.16 4.16 0 0 1-.48-.03 5.63 5.63 0 0 0 3.05.89"></path>
+      </svg>
+      <a [href]="'https://twitter.com/' + user.twitter_username" target="_blank" class="detail-link">
+        @{{ user.twitter_username }}
+      </a>
     </div>
   </div>
 </div>`,
   styles: [`
 .left-panel {
-  background: linear-gradient(135deg, rgba(13, 17, 23, 0.95) 0%, rgba(22, 27, 34, 0.95) 100%);
-  padding: 24px;
-  border-radius: 12px;
-  border: 1px solid rgba(48, 54, 61, 0.4);
+  width: 100%;
+  max-width: 296px;
+  padding: 16px;
   position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
+  top: 24px;
 }
 
+/* Avatar */
 .avatar-container {
   position: relative;
-  margin-bottom: 32px;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  margin-bottom: 16px;
+  cursor: pointer;
 }
 
 .avatar {
-  width: 280px;
-  height: 280px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
   border-radius: 50%;
-  border: 4px solid #30363d;
+  border: 1px solid #30363d;
   display: block;
-  transition: all 0.3s ease;
-  object-fit: cover;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+  background-color: #0d1117;
 }
 
 .avatar:hover {
-  transform: scale(1.02);
-  box-shadow: 0 12px 32px rgba(88, 166, 255, 0.2);
-  border-color: #58a6ff;
+  border-color: rgba(240, 246, 252, 0.1);
+  opacity: 0.9;
 }
 
-.avatar-glow {
+.status-indicator {
   position: absolute;
-  width: 288px;
-  height: 288px;
+  bottom: 14%;
+  right: 14%;
+  width: 15%;
+  height: 15%;
+  background: #21262d;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(88, 166, 255, 0.1) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+  border: 2px solid #0d1117;
+  display: none;
 }
 
-.profile-info {
-  margin-top: 8px;
+/* Profile Header */
+.profile-header {
+  margin-bottom: 8px;
 }
 
 .profile-name {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.25;
   color: #f0f6fc;
-  margin: 0 0 4px 0;
-  line-height: 1.3;
-  letter-spacing: -0.5px;
+  margin: 0 0 2px 0;
+  word-wrap: break-word;
 }
 
-.profile-login {
-  font-size: 18px;
-  color: #8b949e;
-  margin: 0 0 20px 0;
-  font-weight: 400;
-  letter-spacing: 0.3px;
+.profile-username {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #7d8590;
+  margin: 0 0 16px 0;
 }
 
+/* Follow Button */
 .btn-follow {
-  width: 100%;
-  background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
-  border: 1px solid #2ea043;
-  color: #fff;
-  font-weight: 600;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  margin-bottom: 20px;
-  text-transform: capitalize;
-  box-shadow: 0 2px 8px rgba(35, 134, 54, 0.2);
-}
-
-.btn-follow:hover {
-  background: linear-gradient(135deg, #2ea043 0%, #3fb950 100%);
-  border-color: #3fb950;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
-}
-
-.btn-follow:active {
-  transform: translateY(0);
-}
-
-.stats {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #30363d;
-}
-
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #c9d1d9;
-}
-
-.stat-icon {
-  font-size: 16px;
-  display: inline-block;
-  min-width: 20px;
-}
-
-.stat-label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.stat-label strong {
-  color: #f0f6fc;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #30363d, transparent);
-  margin: 16px 0;
-  opacity: 0.6;
-}
-
-.info-section {
-  margin-bottom: 20px;
-}
-
-.bio-text {
-  color: #c9d1d9;
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 0;
-  word-break: break-word;
-  padding: 12px;
-  background: rgba(48, 54, 61, 0.2);
-  border-radius: 6px;
-  border-left: 3px solid #58a6ff;
-}
-
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 16px;
-  padding: 8px;
-  border-radius: 6px;
-  transition: background 0.2s ease;
-}
-
-.info-item:hover {
-  background: rgba(88, 166, 255, 0.05);
-}
-
-.info-icon {
-  font-size: 18px;
-  min-width: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
+  gap: 6px;
+  width: 100%;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #f0f6fc;
+  background-color: #21262d;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 16px;
 }
 
-.info-content {
+.btn-follow:hover {
+  background-color: #30363d;
+  border-color: #8b949e;
+}
+
+.follow-icon {
+  font-size: 12px;
+}
+
+/* Bio Section */
+.bio-section {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #21262d;
+}
+
+.bio-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #f0f6fc;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Followers Section */
+.followers-section {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-  min-width: 0;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #21262d;
+  font-size: 14px;
+  color: #7d8590;
 }
 
-.info-label {
-  font-size: 11px;
-  color: #8b949e;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.follower-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #7d8590;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.follower-link:hover {
+  color: #58a6ff;
+}
+
+.icon-people {
+  flex-shrink: 0;
+}
+
+.follower-count {
+  color: #f0f6fc;
   font-weight: 600;
 }
 
-.info-value,
-.info-link {
+.separator {
+  color: #30363d;
+}
+
+/* Details Section */
+.details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.5;
   color: #f0f6fc;
-  font-size: 13px;
+}
+
+.detail-icon {
+  flex-shrink: 0;
+  color: #7d8590;
+  width: 16px;
+  height: 16px;
+}
+
+.detail-text {
+  color: #f0f6fc;
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
-.info-link {
-  text-decoration: none;
+.detail-link {
   color: #58a6ff;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-block;
+  text-decoration: none;
+  word-break: break-all;
+  transition: color 0.15s ease;
 }
 
-.info-link:hover {
-  text-decoration: underline;
+.detail-link:hover {
   color: #79c0ff;
-  filter: brightness(1.2);
+  text-decoration: underline;
 }
 
-/* Scrollbar Styling */
-.left-panel::-webkit-scrollbar {
-  width: 6px;
-}
-
-.left-panel::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.left-panel::-webkit-scrollbar-thumb {
-  background: #30363d;
-  border-radius: 3px;
-}
-
-.left-panel::-webkit-scrollbar-thumb:hover {
-  background: #484f58;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
+/* Responsive Design */
+@media (max-width: 1011px) {
   .left-panel {
     position: static;
-    max-height: none;
-    border: none;
-    background: transparent;
-    padding: 16px;
-    border-bottom: 1px solid #30363d;
+    max-width: 100%;
+    padding: 0;
     margin-bottom: 24px;
   }
 
-  .avatar {
-    width: 240px;
-    height: 240px;
-  }
-
-  .avatar-glow {
-    width: 248px;
-    height: 248px;
-  }
-
-  .profile-name {
-    font-size: 26px;
-  }
-
-  .profile-login {
-    font-size: 16px;
+  .avatar-container {
+    max-width: 260px;
   }
 }
 
 @media (max-width: 768px) {
-  .left-panel {
-    padding: 12px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
   .avatar-container {
-    margin-bottom: 0;
-    min-width: 160px;
-  }
-
-  .avatar {
-    width: 160px;
-    height: 160px;
-  }
-
-  .avatar-glow {
-    width: 168px;
-    height: 168px;
-  }
-
-  .profile-info {
-    flex: 1;
+    max-width: 200px;
   }
 
   .profile-name {
-    font-size: 20px;
+    font-size: 22px;
   }
 
-  .profile-login {
-    font-size: 14px;
-    margin-bottom: 12px;
-  }
-
-  .btn-follow {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .stats {
-    gap: 8px;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-  }
-
-  .info-item {
-    margin-bottom: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .left-panel {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .avatar-container {
-    min-width: auto;
-    margin-bottom: 16px;
-  }
-
-  .avatar {
-    width: 140px;
-    height: 140px;
-  }
-
-  .avatar-glow {
-    width: 148px;
-    height: 148px;
-  }
-
-  .profile-name {
+  .profile-username {
     font-size: 18px;
-  }
-
-  .profile-login {
-    font-size: 13px;
-  }
-
-  .info-item {
-    text-align: left;
   }
 }
   `]
@@ -452,9 +312,7 @@ import { GitHubUser } from '../../models/user.model';
 export class LeftPanelComponent {
   @Input() user: GitHubUser | null = null;
 
-  get memberSince(): string {
-    if (!this.user) return '';
-    const date = new Date(this.user.created_at);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  formatUrl(url: string): string {
+    return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
   }
 }
